@@ -1,0 +1,44 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import = "java.sql.*,java.util.*"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Process insert</title>
+        <a href="index_html">Home</a><br><br>
+        
+    </head>
+    <body>
+        
+
+<%
+    String patient_name = request.getParameter("patient_name");
+    int patient_age = Integer.parseInt(request.getParameter("patient_age"));
+    String patient_address = request.getParameter("patient_address");
+    String patient_card = request.getParameter("patient_card");
+    String patient_reason = request.getParameter("patient_reason");
+    String patient_date = request.getParameter("patient_date");
+    
+    
+try
+{
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fa","root","");
+    Statement st = conn.createStatement();
+    
+    int i = st.executeUpdate("Insert into fawdt(patient_name, patient_age, patient_address, patient_card, patient_reason ,patient_date,status)" 
+            + "values('"+patient_name+"','"+patient_age+"','"+patient_address+"','"+patient_card+"','"+patient_reason+"','"+patient_date+"','pending')");
+    out.println("Data saved successfully");
+    
+}
+catch (Exception e)
+{
+    System.out.print(e);
+    e.printStackTrace();
+    out.print(e);
+}
+%>
+    
+  
+    </body>
+</html>
