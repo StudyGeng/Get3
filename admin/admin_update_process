@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*" %>
+<%! String driverName = "com.mysql.jdbc.Driver";%>
+<%!String url = "jdbc:mysql://localhost:3306/fa";%>
+<%!String user = "root";%>
+<%!String psw = "";%>
+<%
+String id = request.getParameter("id");
+String patient_name=request.getParameter("patient_name");
+String patient_age=request.getParameter("patient_age");
+String patient_address=request.getParameter("patient_address");
+String patient_card=request.getParameter("patient_card");
+String patient_reason=request.getParameter("patient_reason");
+String patient_date=request.getParameter("patient_date");
+String status=request.getParameter("status");
+
+if(id != null)
+{
+Connection con = null;
+PreparedStatement ps = null;
+int personID = Integer.parseInt(id);
+out.print(id);
+try
+{
+Class.forName(driverName);
+con = DriverManager.getConnection(url,user,psw);
+String sql="Update fawdt set patient_name=?,patient_age=?,patient_address=?,patient_card=?,patient_reason=?, patient_date =?, status =? where id="+ id;
+ps = con.prepareStatement(sql);
+ps.setString(1,patient_name);
+ps.setString(2,patient_age);
+ps.setString(3,patient_address);
+ps.setString(4,patient_card);
+ps.setString(5,patient_reason);
+ps.setString(6,patient_date);
+ps.setString(7,status);
+
+int i = ps.executeUpdate();
+if(i > 0)
+{
+out.print(" Record Updated Successfully");
+}
+else
+{
+out.print("There is a problem in updating Record.");
+}
+}
+catch(SQLException sql)
+{
+request.setAttribute("error", sql);
+out.println(sql);
+}
+}
+%>
+
+<br><br>
+<a href="admin_view.jsp">Table</a>
