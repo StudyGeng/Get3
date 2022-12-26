@@ -1,0 +1,56 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1> Insert Data</h1>
+        <form action="process_insert.jsp" method="POST">
+            <table style ="border:black solid 2px">
+                <tr>
+                    <td colspan="3" style="tex-decoration:underline">
+                        Patient data
+                    </td>
+                <tr>
+                    <td> Patient name</td><td>:</td>
+                    <td><input type="text" name="patient_name" placeholder="Please insert name"></td>
+                </tr>
+                
+                <tr>
+                    <td>Age</td><td>:</td>
+                    <td><input type="number" name="patient_age" placeholder="Please insert age"></td>
+                </tr>
+                
+                <tr>
+                    <td> Patient address</td><td>:</td>
+                    <td><textarea name="patient_address" placeholder="Please insert address" row="3" cols="40"></textarea></td>
+                </tr>
+                
+                <tr>
+                    <td>Patient identification card number</td><td>:</td>
+                    <td><input type="text" name="patient_card" placeholder="Please insert card"></td>
+                </tr>
+                
+                <tr>
+                    <td>Reason</td><td>:</td>
+                    <td><input type="text" name="patient_reason" placeholder="Please insert reason"></td>
+                </tr>
+                      
+                
+                <tr>
+                    <td> Date&Time</td><td>:</td>
+                    <td> <input type="datetime-local" name="patient_date" ></td>
+                </tr>
+      
+                
+                <tr>
+                    <td colspan="3" align="center">
+                        <input type="submit" value="Save data">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
