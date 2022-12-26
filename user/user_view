@@ -1,0 +1,68 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+
+<%
+    String driver = "com.mysql.jdbc.Driver";
+    String connectionUrl = "jdbc:mysql://localhost:3306/";
+    String database = "fa";
+    String userid = "root";
+    String password ="";
+    try{
+    Class.forName(driver);
+    } catch (ClassNotFoundException e) {
+    e.printStackTrace();
+    out.println(e);
+    }
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+%>
+
+<html>
+    <body>
+        <h1> Patient  View</h1>
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>Patient Name</td>
+                <td>Age</td>
+                <td>Patient Address</td>
+                <td>Patient register Card</td>
+                <td>Patient reason</td>
+                <td>Date</td>
+                <td>Status</td>
+                <%
+try{
+connection = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=connection.createStatement();
+String sql = "select * from fawdt";
+resultSet = statement.executeQuery(sql);
+while (resultSet.next()){
+            %>
+            
+            <tr>
+                
+                <td><%=resultSet.getString("id") %></td>
+                <td><%=resultSet.getString("patient_name") %></td>
+                <td><%=resultSet.getString("patient_age") %></td>
+                <td><%=resultSet.getString("patient_address") %></td>
+                <td><%=resultSet.getString("patient_card") %></td>
+                <td><%=resultSet.getString("patient_reason") %></td>
+                <td><%=resultSet.getString("patient_date") %></td>
+                <td><%=resultSet.getString("status") %></td>
+               
+            </tr>
+        </tr>
+        <%
+}
+connection.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+         %>
+    </table>
+    </body>
+</html>
